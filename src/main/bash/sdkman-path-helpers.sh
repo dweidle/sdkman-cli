@@ -82,7 +82,8 @@ function __sdkman_link_candidate_version() {
 
 	# Change the 'current' symlink for the candidate, hence affecting all shells.
 	if [[ -L "${SDKMAN_CANDIDATES_DIR}/${candidate}/current" || -d "${SDKMAN_CANDIDATES_DIR}/${candidate}/current" ]]; then
-		rm -f "${SDKMAN_CANDIDATES_DIR}/${candidate}/current"
+		# In windows environment 'current' is a directory and has to be removed recursivly
+		rm -rf "${SDKMAN_CANDIDATES_DIR}/${candidate}/current"
 	fi
 
 	ln -s "${version}" "${SDKMAN_CANDIDATES_DIR}/${candidate}/current"
